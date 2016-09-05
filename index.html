@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ToDo">
+	<head>
+	<!--
+	*Author: cianroche
+	*Assignment: WI2.0 Mobile Development, Digital Skills Academy
+	*Ref: 	Angularjs: https://angularjs.org/
+			Font: Dafont: http://www.dafont.com/simplicity2.font
+			Create A ToDo App: https://www.youtube.com/watch?v=FSOiVprDdj0	
+	-->
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="css/style.css">	
+		<title>ToDoList</title>
+	</head>
+	<body>
+		<div id="wrapper">
+			<h1>-TO DO LIST-</h1>
+			<div ng-controller="todoController">
+				<form name="form" ng-submit="addToDo()">
+					<input type="text" id="toDoInput" name="newtodo" ng-model="newTodo" required placeholder="Write task here"/>
+					<select ng-model="priority" name="select"><!--Ref: http://codingmiles.com/angular-js-create-a-simple-task-list/ -->
+						<option value="" id="listTitle">PRIORITY</option>
+				        <option value='low'>LOW</option>
+				        <option value='medium'>MEDIUM</option>
+				        <option value='high'>HIGH</option>
+			      	</select>
+					<button ng-disabled="form.$invalid" class="addButton">ADD TASK</button>
+				</form>
+				<button ng-click="deleteItems()" class="clearButton">DELETE CHECKED ITEMS</button>
+
+				
+				<h2>THINGS TO DO: <span class="toDosLeft">{{getTotalTodos()}}</span></h2><!--Ref: http://codepen.io/Russbrown/pen/IgBuh-->
+				
+				<ul>
+					<li ng-repeat="todo in todos track by $index">
+						<input type="checkbox" ng-model="todo.done" />
+						<span ng-class="{'done':todo.done}">{{todo.title}}</span>
+						<span class="priority {{todo.priority}}">{{todo.priority}}</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	<script type="text/javascript" src="angular/angular.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+
+	</body>
+</html>
